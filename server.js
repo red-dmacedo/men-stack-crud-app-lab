@@ -65,6 +65,12 @@ app.get('/blogs/:id/edit', async (req,res) => {
   res.render('blogs/edit.ejs', {post: post});
 });
 
+app.put('/blogs/:id', async (req,res) => {
+  console.log('id:', req.params.id);
+  await Post.findByIdAndUpdate(req.params.id, req.body);
+  res.redirect(`/blogs/${req.params.id}`);
+});
+
 app.listen(localPort, () => {
   console.log(`Listening on port ${localPort}`);
 });
