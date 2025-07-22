@@ -1,12 +1,4 @@
 /* ===== Elements ===== */
-body {
-  background-color: rgba(240,240,240,1);
-}
-
-h1 {
-  display: flex;
-  justify-content: center;
-}
 /* ===== classes ===== */
 .nav-container {
   height: 50px;
@@ -18,11 +10,16 @@ h1 {
 }
 
 .nav-container a {
+  min-width: 100px;
   width: 15vw;
+  max-width: 150px;
   height: 95%;
   display: flex;
+  /* Horizontal */
   align-items: center;
+  /* Veritcal */
   justify-content: center;
+  /* Remove underline */
   text-decoration: none;
   font-size: 20px;
   color: white;

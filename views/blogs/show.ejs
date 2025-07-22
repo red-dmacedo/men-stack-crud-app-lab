@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/styles/general.css">
+  <link rel="stylesheet" href="/styles/nav.css">
+  <link rel="stylesheet" href="/styles/form-container.css">
+  <title>Document</title>
+</head>
+<body>
+  <h1>Red's Blogsite</h1>
+  <%- include('../partials/nav.ejs') %>
+  <!-- To test else, change next line to: if(!post) { -->
+  <% if(post) { %>
+    <h1><%= post.title %></h1>
+    <p><%= post.content %></p>
+    <p>Created: <%= post.created %></p>
+    <div id="form-container">
+      <form action="/blogs/<%= post._id %>/edit" method="GET">
+        <button type="submit">Edit Post</button>
+      </form>
+      <form action="/blogs/<%= post._id %>?_method=DELETE" method="POST">
+        <button type="submit">Delete Post</button>
+      </form>
+    </div>
+  <% } else { %>
+    <p>Error: Post not found 'blogs/:id'</p>
+  <% }; %>
+</body>
+</html>

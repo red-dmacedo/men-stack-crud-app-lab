@@ -1,19 +1,21 @@
 // Constants and Imports
 const localPort = 3000;
-const mongoose = require('mongoose');
 const express = require('express');
+const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const morgan = require("morgan");
 const path = require("path");
+const methodOverride = require("method-override");
 const Post = require('./models/post.js');
 
 dotenv.config();
+const app = express();
 
 // Middleware
-const app = express();
-app.use(express.urlencoded({ extended: false}));
-app.use(morgan("dev"));
+app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
+app.use(morgan("dev"));
+app.use(methodOverride("_method"));
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
@@ -41,15 +43,26 @@ app.post('/blogs', async (req,res) => {
   req.body.created = new Date();
   console.log(req.body);
   if(req.body.title && req.body.content) await Post.create(req.body);
-  res.redirect('blogs/new');
+  res.redirect('/blogs');
 });
 
 app.get('/blogs/new', (req,res) => {
   res.render('blogs/new.ejs');
 });
 
-app.get('/blogs/:id',(req,res) => {
-  res.send(`This is the route for: ${req.params.id}`);
+app.get('/blogs/:id', async (req,res) => {
+  const post = await Post.findById(req.params.id);
+  res.render('blogs/show.ejs', { post: post });
+});
+
+app.delete('/blogs/:id', async (req,res) => {
+  await Post.findByIdAndDelete(req.params.id);
+  res.redirect('/blogs');
+});
+
+app.get('/blogs/:id/edit', async (req,res) => {
+  const post = await Post.findById(req.params.id);
+  res.render('blogs/edit.ejs', {post: post});
 });
 
 app.listen(localPort, () => {

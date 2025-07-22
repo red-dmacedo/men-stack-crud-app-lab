@@ -5,15 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="/styles/general.css">
   <link rel="stylesheet" href="/styles/nav.css">
+  <link rel="stylesheet" href="/styles/form.css">
   <title>Document</title>
 </head>
 <body>
   <h1>Red's Blogsite</h1>
   <%- include('../partials/nav.ejs') %>
-  <h1>All Posts</h1>
-  <% for(let el of posts) { %>
-    <a href="/blogs/<%= el._id %>"><h2><%= el.title %></h2></a>
-    <p>Created: <%= el.created %></p>
-  <% }; %>
+  <h1>Edit Post</h1>
+  <form action="/blogs" method="PUT">
+    <label for="title">Title</label>
+    <input type="text" name="title" id="title" value="<%= post.title %>">
+    <textarea name="content" id="content"><%= post.content %></textarea>
+    <button type="submit">Update</button>
+  </form>
 </body>
 </html>
