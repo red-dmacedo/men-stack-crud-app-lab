@@ -14,8 +14,8 @@
   <!-- To test else, change next line to: if(!post) { -->
   <% if(post) { %>
     <h1><%= post.title %></h1>
-    <p><%= post.content %></p>
-    <p>Created: <%= post.created %></p>
+    <textarea style="width:300px; height: 100px;" readonly><%-post.content%></textarea>
+    <p>Created: <%= post.createdAt %></p>
     <div id="form-container">
       <form action="/blogs/<%= post._id %>/edit" method="GET">
         <button type="submit">Edit Post</button>

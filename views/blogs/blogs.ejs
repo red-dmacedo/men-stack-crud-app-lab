@@ -13,7 +13,7 @@
   <h1>All Posts</h1>
   <% for(let el of posts) { %>
     <a href="/blogs/<%= el._id %>"><h2><%= el.title %></h2></a>
-    <p>Created: <%= el.created %></p>
+    <p>Created: <%= el.createdAt %></p>
   <% }; %>
 </body>
 </html>
