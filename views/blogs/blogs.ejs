@@ -9,5 +9,9 @@
 <body>
   <h1>All Blogs</h1>
   <%- include('../partials/nav.ejs') %>
+  <% for(let el of posts) { %>
+    <a href="/blogs/<%= el._id %>"><h2><%= el.title %></h2></a>
+    <p>Created: <%= el.created %></p>
+  <% }; %>
 </body>
 </html>

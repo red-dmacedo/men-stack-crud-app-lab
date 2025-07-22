@@ -1,3 +1,4 @@
+// Constants and Imports
 const localPort = 3000;
 const mongoose = require('mongoose');
 const express = require('express');
@@ -7,6 +8,8 @@ const path = require("path");
 const Post = require('./models/post.js');
 
 dotenv.config();
+
+// Middleware
 const app = express();
 app.use(express.urlencoded({ extended: false}));
 app.use(morgan("dev"));
@@ -28,8 +31,9 @@ app.get('/home', (req,res) => {
   res.render('home.ejs');
 });
 
-app.get('/blogs', (req,res) => {
-  res.render('blogs/blogs.ejs');
+app.get('/blogs', async (req,res) => {
+  const posts = await Post.find({});
+  res.render('blogs/blogs.ejs', { posts: posts });
 });
 
 app.post('/blogs', async (req,res) => {
