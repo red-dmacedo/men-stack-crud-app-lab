@@ -1,0 +1,21 @@
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+form label {
+  gap: 0px;
+}
+
+form textarea {
+  width: 80vw;
+  height: 30vh;
+}
+
+form input {
+  width: 30vw;
+  height: 24px;
+}

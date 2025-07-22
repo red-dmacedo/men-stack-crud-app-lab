@@ -32,8 +32,16 @@ app.get('/blogs', (req,res) => {
   res.render('blogs/blogs.ejs');
 });
 
-app.post('/blogs/new', (req,res) => {
-  res.render('blogs.ejs');
+app.post('/blogs', async (req,res) => {
+  req.body.author = 'test-user';
+  req.body.created = new Date();
+  console.log(req.body);
+  if(req.body.title && req.body.content) await Post.create(req.body);
+  res.redirect('blogs/new');
+});
+
+app.get('/blogs/new', (req,res) => {
+  res.render('blogs/new.ejs');
 });
 
 app.get('/blogs/:id',(req,res) => {
